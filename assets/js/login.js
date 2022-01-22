@@ -40,10 +40,11 @@ $(function() {
       username: $('#form_reg [name=username]').val(),
       password: $('#form_reg [name=password]').val()
     }
-    $.post('/api/reguser', data, function(res) {
+    $.post('api/reguser', data, function(res) {
       if (res.status !== 0) {
         return layer.msg(res.message)
       }
+      console.log('注册成功')
       layer.msg('注册成功，请登录！')
       // 模拟人的点击行为
       $('#link_login').click()
@@ -55,7 +56,7 @@ $(function() {
     // 阻止默认提交行为
     e.preventDefault()
     $.ajax({
-      url: '/api/login',
+      url: 'api/login',
       method: 'POST',
       // 快速获取表单中的数据
       data: $(this).serialize(),
@@ -66,7 +67,7 @@ $(function() {
         layer.msg('登录成功！')
         // 将登录成功得到的 token 字符串，保存到 localStorage 中
         localStorage.setItem('token', res.token)
-        // 跳转到后台主页
+        //跳转到后台主页
         location.href = '/index.html'
       }
     })
